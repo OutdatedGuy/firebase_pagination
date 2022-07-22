@@ -100,3 +100,4 @@ RealtimeDBPagination(
 |    `shrinkWrap`    |              **Should the ScrollView be shrink-wrapped.**              |        _bool_        |             `false`             |
 |     `physics`      |           **The scroll behavior to use for the ScrollView.**           |   _ScrollPhysics_    |                -                |
 |     `padding`      |               **The padding to use for the ScrollView.**               | _EdgeInsetsGeometry_ |                -                |
+|    `controller`    |             **The controller to use for the ScrollView.**              |  _ScrollController_  |                -                |
