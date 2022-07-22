@@ -59,6 +59,7 @@ class RealtimeDBPagination extends StatefulWidget {
     this.shrinkWrap = false,
     this.physics,
     this.padding,
+    this.controller,
   });
 
   /// The query to use to fetch data from Firebase Realtime Database.
@@ -137,6 +138,11 @@ class RealtimeDBPagination extends StatefulWidget {
   /// The padding to use for the [ScrollView].
   final EdgeInsetsGeometry? padding;
 
+  /// The scroll controller to use for the [ScrollView].
+  ///
+  /// Defaults to [ScrollController].
+  final ScrollController? controller;
+
   @override
   State<RealtimeDBPagination> createState() => _RealtimeDBPaginationState();
 }
@@ -155,7 +161,8 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
   StreamSubscription<DatabaseEvent>? _liveStreamSub;
 
   /// [ScrollController] to listen to scroll end and load more data.
-  final ScrollController _controller = ScrollController();
+  late final ScrollController _controller =
+      widget.controller ?? ScrollController();
 
   /// Whether initial data is loading.
   bool _isInitialLoading = true;

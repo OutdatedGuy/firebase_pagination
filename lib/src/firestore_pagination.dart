@@ -59,6 +59,7 @@ class FirestorePagination extends StatefulWidget {
     this.shrinkWrap = false,
     this.physics,
     this.padding,
+    this.controller,
   });
 
   /// The query to use to fetch data from Firestore.
@@ -136,6 +137,11 @@ class FirestorePagination extends StatefulWidget {
   /// The padding to use for the [ScrollView].
   final EdgeInsetsGeometry? padding;
 
+  /// The scroll controller to use for the [ScrollView].
+  ///
+  /// Defaults to [ScrollController].
+  final ScrollController? controller;
+
   @override
   State<FirestorePagination> createState() => _FirestorePaginationState();
 }
@@ -154,7 +160,8 @@ class _FirestorePaginationState extends State<FirestorePagination> {
   StreamSubscription<QuerySnapshot>? _liveStreamSub;
 
   /// [ScrollController] to listen to scroll end and load more data.
-  final ScrollController _controller = ScrollController();
+  late final ScrollController _controller =
+      widget.controller ?? ScrollController();
 
   /// Whether initial data is loading.
   bool _isInitialLoading = true;
