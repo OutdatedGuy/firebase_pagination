@@ -11,7 +11,7 @@ A simple and effective way to **Paginate** Firebase related data.
 
 <hr />
 
-[Video Demo](https://user-images.githubusercontent.com/74326345/178007676-fe049a56-0b0b-4f58-bc2e-f21851e89e32.mp4)
+![Video Demo](https://user-images.githubusercontent.com/74326345/185149833-ccb22cc3-5cc5-4c33-9109-3b9156b53363.gif)
 
 ## Features
 
