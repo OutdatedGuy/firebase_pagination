@@ -1,3 +1,8 @@
+## 1.1.1+1
+
+- DOCS: readme changing pr count to closed issues count
+- DOCS: changing readme links to relative blob files
+
 ## 1.1.1
 
 - FIX: Demo video not visible in readme
