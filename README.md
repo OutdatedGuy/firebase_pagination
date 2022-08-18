@@ -7,7 +7,7 @@ A simple and effective way to **Paginate** Firebase related data.
 [![style: very good analysis][lints_svg]](https://pub.dev/packages/very_good_analysis)
 
 [![GitHub issues open][issues_svg]](https://github.com/OutdatedGuy/firebase_pagination/issues)
-[![GitHub issues closed][issues_closed_svg]](https://github.com/OutdatedGuy/firebase_pagination/pulls)
+[![GitHub issues closed][issues_closed_svg]](https://github.com/OutdatedGuy/firebase_pagination/issues?q=is%3Aissue+is%3Aclosed)
 
 <hr />
 
