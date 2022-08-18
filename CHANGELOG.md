@@ -1,3 +1,7 @@
+## 1.1.1+2
+
+- FIX: closed issues link not correct (readme)
+
 ## 1.1.1+1
 
 - DOCS: readme changing pr count to closed issues count
