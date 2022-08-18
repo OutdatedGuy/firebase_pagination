@@ -6,8 +6,8 @@ A simple and effective way to **Paginate** Firebase related data.
 [![GitHub][license_svg]](LICENSE)
 [![style: very good analysis][lints_svg]](https://pub.dev/packages/very_good_analysis)
 
-[![GitHub issues][issues_svg]](https://github.com/OutdatedGuy/firebase_pagination/issues)
-[![GitHub issues][pr_svg]](https://github.com/OutdatedGuy/firebase_pagination/pulls)
+[![GitHub issues open][issues_svg]](https://github.com/OutdatedGuy/firebase_pagination/issues)
+[![GitHub issues closed][issues_closed_svg]](https://github.com/OutdatedGuy/firebase_pagination/pulls)
 
 <hr />
 
@@ -108,4 +108,4 @@ RealtimeDBPagination(
 [license_svg]: https://img.shields.io/github/license/OutdatedGuy/firebase_pagination.svg?color=purple
 [lints_svg]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [issues_svg]: https://img.shields.io/github/issues/OutdatedGuy/firebase_pagination.svg
-[pr_svg]: https://img.shields.io/github/issues-pr/OutdatedGuy/firebase_pagination.svg
+[issues_closed_svg]: https://img.shields.io/github/issues-closed/OutdatedGuy/firebase_pagination.svg?color=green
