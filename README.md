@@ -2,12 +2,12 @@
 
 A simple and effective way to **Paginate** Firebase related data.
 
-[![pub package](https://img.shields.io/pub/v/firebase_pagination.svg?color=blueviolet)](https://pub.dev/packages/firebase_pagination)
-[![GitHub](https://img.shields.io/github/license/OutdatedGuy/firebase_pagination.svg?color=purple)](https://pub.dev/packages/firebase_pagination/license)
-[![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
+[![pub package][package_svg]](https://pub.dev/packages/firebase_pagination)
+[![GitHub][license_svg]](https://pub.dev/packages/firebase_pagination/license)
+[![style: very good analysis][lints_svg]](https://pub.dev/packages/very_good_analysis)
 
-[![GitHub issues](https://img.shields.io/github/issues/OutdatedGuy/firebase_pagination.svg)](https://github.com/OutdatedGuy/firebase_pagination/issues)
-[![GitHub issues](https://img.shields.io/github/issues-pr/OutdatedGuy/firebase_pagination.svg)](https://github.com/OutdatedGuy/firebase_pagination/pulls)
+[![GitHub issues][issues_svg]](https://github.com/OutdatedGuy/firebase_pagination/issues)
+[![GitHub issues][pr_svg]](https://github.com/OutdatedGuy/firebase_pagination/pulls)
 
 <hr />
 
@@ -101,3 +101,11 @@ RealtimeDBPagination(
 |     `physics`      |           **The scroll behavior to use for the ScrollView.**           |   _ScrollPhysics_    |                -                |
 |     `padding`      |               **The padding to use for the ScrollView.**               | _EdgeInsetsGeometry_ |                -                |
 |    `controller`    |             **The controller to use for the ScrollView.**              |  _ScrollController_  |                -                |
+
+<!-- Badges URLs -->
+
+[package_svg]: https://img.shields.io/pub/v/firebase_pagination.svg?color=blueviolet
+[license_svg]: https://img.shields.io/github/license/OutdatedGuy/firebase_pagination.svg?color=purple
+[lints_svg]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
+[issues_svg]: https://img.shields.io/github/issues/OutdatedGuy/firebase_pagination.svg
+[pr_svg]: https://img.shields.io/github/issues-pr/OutdatedGuy/firebase_pagination.svg
