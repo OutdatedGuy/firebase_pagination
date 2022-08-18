@@ -3,7 +3,7 @@
 A simple and effective way to **Paginate** Firebase related data.
 
 [![pub package][package_svg]](https://pub.dev/packages/firebase_pagination)
-[![GitHub][license_svg]](https://pub.dev/packages/firebase_pagination/license)
+[![GitHub][license_svg]](LICENSE)
 [![style: very good analysis][lints_svg]](https://pub.dev/packages/very_good_analysis)
 
 [![GitHub issues][issues_svg]](https://github.com/OutdatedGuy/firebase_pagination/issues)
@@ -62,7 +62,7 @@ RealtimeDBPagination(
 ),
 ```
 
-> For more examples, see the [examples](https://pub.dev/packages/firebase_pagination/example) section.
+> For more examples, see the [examples](example/example.md) section.
 
 ## How it Works
 
