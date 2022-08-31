@@ -1,3 +1,7 @@
+## 1.1.2
+
+- FIX: `startAt` value for firebase database not valid
+
 ## 1.1.1+2
 
 - FIX: closed issues link not correct (readme)
