@@ -1,3 +1,7 @@
+## 1.1.3
+
+- FIX: `endBefore` value for firebase database not valid
+
 ## 1.1.2
 
 - FIX: `startAt` value for firebase database not valid
