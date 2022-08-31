@@ -234,7 +234,7 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
 
     var latestDocQuery = widget.query.limitToFirst(1);
     if (_data.isNotEmpty) {
-      latestDocQuery = latestDocQuery.endBefore(_data.first);
+      latestDocQuery = latestDocQuery.endBefore(null, key: _data.first.key);
     }
 
     _liveStreamSub = latestDocQuery.onValue.listen(
