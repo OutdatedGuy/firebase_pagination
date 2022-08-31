@@ -190,7 +190,7 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
     final docsLimit = _data.length + (getMore ? widget.limit : 0);
     var docsQuery = widget.query.limitToFirst(docsLimit);
     if (_data.isNotEmpty) {
-      docsQuery = docsQuery.startAt(_data.first);
+      docsQuery = docsQuery.startAt(null, key: _data.first.key);
     }
 
     _streamSub = docsQuery.onValue.listen((DatabaseEvent snapshot) async {
