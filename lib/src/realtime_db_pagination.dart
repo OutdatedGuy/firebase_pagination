@@ -43,6 +43,7 @@ class RealtimeDBPagination extends StatefulWidget {
     super.key,
     required this.query,
     required this.itemBuilder,
+    required this.orderBy,
     this.separatorBuilder,
     this.limit = 10,
     this.viewType = ViewType.list,
@@ -74,6 +75,19 @@ class RealtimeDBPagination extends StatefulWidget {
   /// The builder is passed the build context, snapshot of data and index of
   /// the item in the list.
   final Widget Function(BuildContext, DataSnapshot, int) itemBuilder;
+
+  /// The field to use to sort the data. Give the same value as the field
+  /// used to order the data in the query.
+  ///
+  /// ## Example
+  /// If the query is:
+  /// ```dart
+  /// FirebaseDatabase.instance.ref('messages').orderByChild('createdAt')
+  /// ```
+  /// Then the value of [orderBy] should be `createdAt`.
+  ///
+  /// If null, the data will be sorted by the key.
+  final String? orderBy;
 
   /// The builder to use to render the separator.
   ///
@@ -190,7 +204,9 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
     final docsLimit = _data.length + (getMore ? widget.limit : 0);
     var docsQuery = widget.query.limitToFirst(docsLimit);
     if (_data.isNotEmpty) {
-      docsQuery = docsQuery.startAt(null, key: _data.first.key);
+      docsQuery = docsQuery.startAt(
+        (_data.first.value as Map<String, dynamic>?)?[widget.orderBy],
+      );
     }
 
     _streamSub = docsQuery.onValue.listen((DatabaseEvent snapshot) async {
@@ -234,7 +250,9 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
 
     var latestDocQuery = widget.query.limitToFirst(1);
     if (_data.isNotEmpty) {
-      latestDocQuery = latestDocQuery.endBefore(null, key: _data.first.key);
+      latestDocQuery = latestDocQuery.endBefore(
+        (_data.first.value as Map<String, dynamic>?)?[widget.orderBy],
+      );
     }
 
     _liveStreamSub = latestDocQuery.onValue.listen(
