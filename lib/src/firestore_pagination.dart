@@ -1,5 +1,6 @@
 // Flutter Packages
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 // Dart Packages
 import 'dart:async';
@@ -222,6 +223,15 @@ class _FirestorePaginationState extends State<FirestorePagination> {
       }
 
       if (mounted) setState(() {});
+
+      // Add data till the view is scrollable. This ensures that the user can
+      // scroll to the bottom and load more data.
+      if (_isInitialLoading || _isFetching || _isEnded) return;
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (_controller.position.maxScrollExtent <= 0) {
+          _loadDocuments();
+        }
+      });
     });
   }
 
@@ -256,11 +266,10 @@ class _FirestorePaginationState extends State<FirestorePagination> {
 
   /// To handle scroll end event and load more data.
   void _scrollListener() {
+    if (_isInitialLoading || _isFetching || _isEnded) return;
+
     final position = _controller.position;
-    if (position.pixels >= (position.maxScrollExtent - 50) &&
-        !_isInitialLoading &&
-        !_isFetching &&
-        !_isEnded) {
+    if (position.pixels >= (position.maxScrollExtent - 50)) {
       _loadDocuments();
     }
   }
