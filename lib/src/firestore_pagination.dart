@@ -247,7 +247,8 @@ class _FirestorePaginationState extends State<FirestorePagination> {
       latestDocQuery = latestDocQuery.endBeforeDocument(_docs.first);
     }
 
-    _liveStreamSub = latestDocQuery.snapshots().listen(
+    _liveStreamSub =
+        latestDocQuery.snapshots(includeMetadataChanges: true).listen(
       (QuerySnapshot snapshot) async {
         await tempSub?.cancel();
         if (snapshot.docs.isEmpty ||
