@@ -206,7 +206,9 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
     var docsQuery = widget.query.limitToFirst(docsLimit);
     if (_data.isNotEmpty) {
       docsQuery = docsQuery.startAt(
-        (_data.first.value as Map<String, dynamic>?)?[widget.orderBy],
+        Map<String, dynamic>.from(
+          _data.first.value! as Map<Object?, Object?>,
+        )[widget.orderBy],
       );
     }
 
@@ -261,7 +263,9 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
     var latestDocQuery = widget.query.limitToFirst(1);
     if (_data.isNotEmpty) {
       latestDocQuery = latestDocQuery.endBefore(
-        (_data.first.value as Map<String, dynamic>?)?[widget.orderBy],
+        Map<String, dynamic>.from(
+          _data.first.value! as Map<Object?, Object?>,
+        )[widget.orderBy],
       );
     }
 

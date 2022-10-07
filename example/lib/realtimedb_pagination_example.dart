@@ -39,8 +39,9 @@ class _RealtimeDBPaginationExampleState
               padding: const EdgeInsets.all(8.0),
               separatorBuilder: (context, index) => const Divider(),
               itemBuilder: (context, snapshot, index) {
-                String? msg =
-                    (snapshot.value as Map<String, dynamic>?)?['text'];
+                String? msg = Map<String, dynamic>.from(
+                  snapshot.value! as Map<Object?, Object?>,
+                )['text'];
 
                 return ListTile(
                   shape: RoundedRectangleBorder(
