@@ -1,3 +1,13 @@
+## 2.0.0
+
+- **BREAKING CHANGE:** added required field `orderBy` for realtime live listener.
+
+- FIX: realtime db pagination shows data without live listener
+- FIX: more data not loaded when view not scrollable
+- FIX: firestore newly added data not shown for non server-timestamp queries
+- FIX: realtime db typecasting for android
+- DOCS: added example code for both paginations
+
 ## 1.1.3
 
 - FIX: `endBefore` value for firebase database not valid
