@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cloud_firestore: ^3.1.18
-  firebase_database: ^9.0.16
+  cloud_firestore: ^4.1.0
+  firebase_database: ^10.0.6
 
 dev_dependencies:
   flutter_test:
