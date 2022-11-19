@@ -1,3 +1,7 @@
+## 3.0.0
+
+- CHORE: Updated to latest version of firebase packages
+
 ## 2.0.0
 
 - **BREAKING CHANGE:** added required field `orderBy` for realtime live listener.
