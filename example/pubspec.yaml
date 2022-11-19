@@ -30,9 +30,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  firebase_database: ^9.1.5
-  firebase_core: ^1.23.0
-  cloud_firestore: ^3.4.9
+  firebase_database: ^10.0.6
+  firebase_core: ^2.3.0
+  cloud_firestore: ^4.1.0
 
   firebase_pagination:
     path: ..
