@@ -206,7 +206,7 @@ class _FirestorePaginationState extends State<FirestorePagination> {
       );
 
       _isFetching = false;
-      if (!_isEnded && !isDocRemoved) {
+      if (!isDocRemoved) {
         _isEnded = snapshot.docs.length < docsLimit;
       }
 
