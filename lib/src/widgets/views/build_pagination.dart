@@ -15,7 +15,6 @@ class BuildPagination<T> extends StatelessWidget {
   ///
   /// The [viewType] determines the type of [ScrollView] to use.
   const BuildPagination({
-    super.key,
     required this.items,
     required this.itemBuilder,
     required this.separatorBuilder,
@@ -28,6 +27,7 @@ class BuildPagination<T> extends StatelessWidget {
     required this.reverse,
     required this.controller,
     required this.shrinkWrap,
+    super.key,
     this.physics,
     this.padding,
   });
