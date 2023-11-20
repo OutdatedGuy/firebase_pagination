@@ -41,9 +41,9 @@ class FirestorePagination extends StatefulWidget {
   ///
   /// Data can be represented in a [ListView], [GridView] or scollable [Wrap].
   const FirestorePagination({
-    super.key,
     required this.query,
     required this.itemBuilder,
+    super.key,
     this.separatorBuilder,
     this.limit = 10,
     this.viewType = ViewType.list,

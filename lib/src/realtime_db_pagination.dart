@@ -41,10 +41,10 @@ class RealtimeDBPagination extends StatefulWidget {
   ///
   /// Data can be represented in a [ListView], [GridView] or scollable [Wrap].
   const RealtimeDBPagination({
-    super.key,
     required this.query,
     required this.itemBuilder,
     required this.orderBy,
+    super.key,
     this.separatorBuilder,
     this.limit = 10,
     this.viewType = ViewType.list,
