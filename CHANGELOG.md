@@ -1,3 +1,7 @@
+## 3.0.1
+
+- fix: docs not loading after the first sroll
+
 ## 3.0.0
 
 - CHORE: Updated to latest version of firebase packages
