@@ -224,7 +224,7 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
       final isDataRemoved = snapshot.type == DatabaseEventType.childRemoved;
 
       _isFetching = false;
-      if (!_isEnded && !isDataRemoved) {
+      if (!isDataRemoved) {
         _isEnded = snapshot.snapshot.children.length < docsLimit;
       }
 
