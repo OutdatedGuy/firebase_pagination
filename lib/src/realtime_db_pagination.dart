@@ -45,6 +45,7 @@ class RealtimeDBPagination extends StatefulWidget {
     required this.itemBuilder,
     required this.orderBy,
     super.key,
+    this.descending = false,
     this.separatorBuilder,
     this.limit = 10,
     this.viewType = ViewType.list,
@@ -89,6 +90,10 @@ class RealtimeDBPagination extends StatefulWidget {
   ///
   /// If null, the data will be sorted by the key.
   final String? orderBy;
+
+  /// Fetches and shows the last data first from the database
+  /// defaults descending = false
+  final bool descending;
 
   /// The builder to use to render the separator.
   ///
@@ -203,7 +208,9 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
     if (getMore) setState(() => _isFetching = true);
 
     final docsLimit = _data.length + (getMore ? widget.limit : 0);
-    var docsQuery = widget.query.limitToFirst(docsLimit);
+    var docsQuery = widget.descending
+        ? widget.query.limitToLast(docsLimit)
+        : widget.query.limitToFirst(docsLimit);
     if (_data.isNotEmpty) {
       docsQuery = docsQuery.startAt(
         Map<String, dynamic>.from(
@@ -260,7 +267,9 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
     // To cancel previous live listener when new one is set.
     final tempSub = _liveStreamSub;
 
-    var latestDocQuery = widget.query.limitToFirst(1);
+    var latestDocQuery = widget.descending
+        ? widget.query.limitToLast(1)
+        : widget.query.limitToFirst(1);
     if (_data.isNotEmpty) {
       latestDocQuery = latestDocQuery.endBefore(
         Map<String, dynamic>.from(
@@ -319,7 +328,9 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
         : _data.isEmpty
             ? widget.onEmpty
             : BuildPagination(
-                items: _data,
+                items: widget.descending
+                    ? _data.toList().reversed.toList()
+                    : _data,
                 itemBuilder: widget.itemBuilder,
                 separatorBuilder: widget.separatorBuilder ?? separatorBuilder,
                 isLoading: _isFetching,
