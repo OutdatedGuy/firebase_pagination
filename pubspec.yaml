@@ -1,6 +1,6 @@
 name: firebase_pagination
 description: A flutter package to paginate realtime database and firestore with realtime updates.
-version: 3.0.2
+version: 3.0.1
 homepage: https://outdatedguy.rocks
 repository: https://github.com/OutdatedGuy/firebase_pagination
 
