@@ -91,8 +91,9 @@ class RealtimeDBPagination extends StatefulWidget {
   /// If null, the data will be sorted by the key.
   final String? orderBy;
 
-  /// Fetches and shows the last data first from the database
-  /// defaults descending = false
+  /// Fetches and shows the last data first from the database.
+  ///
+  /// Default value is `false`.
   final bool descending;
 
   /// The builder to use to render the separator.
@@ -329,7 +330,7 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
             ? widget.onEmpty
             : BuildPagination(
                 items: widget.descending
-                    ? _data.toList().reversed.toList()
+                    ? _data.reversed.toList()
                     : _data,
                 itemBuilder: widget.itemBuilder,
                 separatorBuilder: widget.separatorBuilder ?? separatorBuilder,
