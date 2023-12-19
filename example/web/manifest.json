@@ -1,11 +1,11 @@
 {
-    "name": "example",
-    "short_name": "example",
+    "name": "firebase_pagination_example",
+    "short_name": "firebase_pagination_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Demonstrates how to use the firebase_pagination package.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

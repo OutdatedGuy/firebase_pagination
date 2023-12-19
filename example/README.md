@@ -1,6 +1,6 @@
-# example
+# firebase_pagination_example
 
-A new Flutter project.
+Demonstrates how to use the firebase_pagination package.
 
 ## Getting Started
 

@@ -1,7 +1,9 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.example">
-   <application
-        android:label="example"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:label="Firebase Pagination Example"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
