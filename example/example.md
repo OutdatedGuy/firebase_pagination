@@ -5,6 +5,34 @@
 > RealtimeDBPagination widget with only the `query` and `itemBuilder` params
 > differing from FirestorePagination.
 
+#### To try package example follow these steps:
+
+1. Clone the repo using:
+
+   ```bash
+   git clone https://github.com/OutdatedGuy/firebase_pagination
+   ```
+
+1. Change directory to `example`:
+
+   ```bash
+   cd firebase_pagination/example
+   ```
+
+1. Run flutterfire cli to setup firebase project:
+
+   ```bash
+   flutterfire configure --project=<your-firebase-project-id> --platforms="android,ios,macos,web" -i rocks.outdatedguy.firebasePaginationExample -m rocks.outdatedguy.firebasePaginationExample -a rocks.outdatedguy.firebase_pagination_example -w firebase_pagination_example
+   ```
+
+1. Run the app using:
+
+   Supported platforms are `android`, `ios`, `macos` and `web`.
+
+   ```bash
+    flutter run
+   ```
+
 #### For a simple list view pagination (with a custom bottom loader)
 
 ```dart

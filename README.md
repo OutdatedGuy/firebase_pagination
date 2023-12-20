@@ -2,12 +2,11 @@
 
 A simple and effective way to **Paginate** Firebase related data.
 
-[![pub package][package_svg]](https://pub.dev/packages/firebase_pagination)
+[![pub package][package_svg]][package]
 [![GitHub][license_svg]](LICENSE)
-[![style: very good analysis][lints_svg]](https://pub.dev/packages/very_good_analysis)
 
-[![GitHub issues open][issues_svg]](https://github.com/OutdatedGuy/firebase_pagination/issues)
-[![GitHub issues closed][issues_closed_svg]](https://github.com/OutdatedGuy/firebase_pagination/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub issues open][issues_svg]][issues]
+[![GitHub issues closed][issues_closed_svg]][issues_closed]
 
 <hr />
 
@@ -62,7 +61,7 @@ RealtimeDBPagination(
 ),
 ```
 
-> For more examples, see the [examples](example/example.md) section.
+#### For more examples, see the [examples](example/example.md) section.
 
 ## How it Works
 
@@ -102,10 +101,18 @@ RealtimeDBPagination(
 |     `padding`      |               **The padding to use for the ScrollView.**               | _EdgeInsetsGeometry_ |                -                |
 |    `controller`    |             **The controller to use for the ScrollView.**              |  _ScrollController_  |                -                |
 
+### If you liked the package, then please give it a [Like 👍🏼][package] and [Star ⭐][repository]
+
 <!-- Badges URLs -->
 
 [package_svg]: https://img.shields.io/pub/v/firebase_pagination.svg?color=blueviolet
 [license_svg]: https://img.shields.io/github/license/OutdatedGuy/firebase_pagination.svg?color=purple
-[lints_svg]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [issues_svg]: https://img.shields.io/github/issues/OutdatedGuy/firebase_pagination.svg
 [issues_closed_svg]: https://img.shields.io/github/issues-closed/OutdatedGuy/firebase_pagination.svg?color=green
+
+<!-- Links -->
+
+[package]: https://pub.dev/packages/firebase_pagination
+[repository]: https://github.com/OutdatedGuy/firebase_pagination
+[issues]: https://github.com/OutdatedGuy/firebase_pagination/issues
+[issues_closed]: https://github.com/OutdatedGuy/firebase_pagination/issues?q=is%3Aissue+is%3Aclosed
