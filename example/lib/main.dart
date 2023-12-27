@@ -45,50 +45,52 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Firebase Pagination Example'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const FirestorePaginationExample(),
-                  ),
-                );
-              },
-              child: const Text('Firestore Pagination Example'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const RealtimeDBAscendingPaginationExample();
-                    },
-                  ),
-                );
-              },
-              child: const Text('Realtime DB Ascending Pagination Example'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const RealtimeDBDescendingPaginationExample();
-                    },
-                  ),
-                );
-              },
-              child: const Text('Realtime DB Descending Pagination Example'),
-            ),
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FirestorePaginationExample(),
+                    ),
+                  );
+                },
+                child: const Text('Firestore Pagination Example'),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const RealtimeDBAscendingPaginationExample();
+                      },
+                    ),
+                  );
+                },
+                child: const Text('Realtime DB Ascending Pagination Example'),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const RealtimeDBDescendingPaginationExample();
+                      },
+                    ),
+                  );
+                },
+                child: const Text('Realtime DB Descending Pagination Example'),
+              ),
+            ],
+          ),
         ),
       ),
     );

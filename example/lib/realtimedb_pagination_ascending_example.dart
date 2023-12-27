@@ -26,65 +26,78 @@ class _RealtimeDBAscendingPaginationExampleState
       appBar: AppBar(
         title: const Text('Realtime DB Ascending Pagination Example'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: RealtimeDBPagination(
-              query: FirebaseDatabase.instance
-                  .ref('TODO List')
-                  .orderByChild('createdAt'),
-              orderBy: 'createdAt',
-              isLive: true,
-              limit: 6,
-              padding: const EdgeInsets.all(8.0),
-              separatorBuilder: (context, index) => const Divider(),
-              onEmpty: const Center(
-                child: Text('No TODO tasks found!!!'),
-              ),
-              itemBuilder: (context, snapshot, index) {
-                final msg = snapshot.child('text').value as String?;
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: RealtimeDBPagination(
+                query: FirebaseDatabase.instance
+                    .ref('TODO List')
+                    .orderByChild('createdAt'),
+                orderBy: 'createdAt',
+                isLive: true,
+                limit: 6,
+                padding: const EdgeInsets.all(8.0),
+                separatorBuilder: (context, index) => const Divider(),
+                onEmpty: const Center(
+                  child: Text('No TODO tasks found!!!'),
+                ),
+                itemBuilder: (context, snapshot, index) {
+                  final msg = snapshot.child('text').value as String?;
 
-                return ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  tileColor: Colors.blueAccent[700],
-                  title: SelectableText(
-                    '${index + 1}. $msg',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  return ListTile(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    tileColor: Colors.blueAccent[700],
+                    leading: Text(
+                      '$index.',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    title: SelectableText(
+                      '$msg',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _textController,
+                      focusNode: _focusNode,
+                      autofocus: true,
+                      decoration: const InputDecoration(
+                        hintText: 'Enter a TODO task',
+                      ),
+                      onSubmitted: (_) => _sendMessage(),
                     ),
                   ),
-                );
-              },
-            ),
-          ),
-          Container(
-            color: Colors.white,
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _textController,
-                    focusNode: _focusNode..requestFocus(),
-                    autofocus: true,
-                    decoration: const InputDecoration(
-                      hintText: 'Enter a TODO task',
-                    ),
-                    onSubmitted: (_) => _sendMessage(),
+                  const SizedBox(width: 8.0),
+                  IconButton(
+                    icon: const Icon(Icons.send),
+                    onPressed: _sendMessage,
                   ),
-                ),
-                const SizedBox(width: 8.0),
-                IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: _sendMessage,
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        height: MediaQuery.of(context).padding.bottom,
       ),
     );
   }
