@@ -208,16 +208,37 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
 
     if (getMore) setState(() => _isFetching = true);
 
+    // Sets limit of nodes to fetch.
+    // If currently 15 items are loaded, and limit is 5 then total 20 items
+    // will be fetched including the ones already present.
     final docsLimit = _data.length + (getMore ? widget.limit : 0);
     var docsQuery = widget.descending
         ? widget.query.limitToLast(docsLimit)
         : widget.query.limitToFirst(docsLimit);
+
     if (_data.isNotEmpty) {
-      docsQuery = docsQuery.startAt(
-        Map<String, dynamic>.from(
-          _data.first.value! as Map<Object?, Object?>,
-        )[widget.orderBy],
-      );
+      if (widget.descending) {
+        // Sets ending point from where before data should be fetched.
+        // If currently 15 items are loaded, and limit is 5 then total 20 items
+        // will be fetched where below mentioned value will be the largest and
+        // last in the fetched array (But first in callback array as using
+        // reversed in build method)
+        docsQuery = docsQuery.endAt(
+          Map<String, dynamic>.from(
+            _data.last.value! as Map<Object?, Object?>,
+          )[widget.orderBy],
+        );
+      } else {
+        // Sets starting point from where after data should be fetched.
+        // If currently 15 items are loaded, and limit is 5 then total 20 items
+        // will be fetched where below mentioned value will be the smallest and
+        // first in array
+        docsQuery = docsQuery.startAt(
+          Map<String, dynamic>.from(
+            _data.first.value! as Map<Object?, Object?>,
+          )[widget.orderBy],
+        );
+      }
     }
 
     _streamSub = docsQuery.onValue.listen((DatabaseEvent snapshot) async {
@@ -271,12 +292,25 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
     var latestDocQuery = widget.descending
         ? widget.query.limitToLast(1)
         : widget.query.limitToFirst(1);
+
     if (_data.isNotEmpty) {
-      latestDocQuery = latestDocQuery.endBefore(
-        Map<String, dynamic>.from(
-          _data.first.value! as Map<Object?, Object?>,
-        )[widget.orderBy],
-      );
+      if (widget.descending) {
+        // Sets query to fetch data after the last element in the array,
+        // which is the largest value.
+        latestDocQuery = latestDocQuery.startAfter(
+          Map<String, dynamic>.from(
+            _data.last.value! as Map<Object?, Object?>,
+          )[widget.orderBy],
+        );
+      } else {
+        // Sets query to fetch data before the first element in the array,
+        // whch is the smallest value
+        latestDocQuery = latestDocQuery.endBefore(
+          Map<String, dynamic>.from(
+            _data.first.value! as Map<Object?, Object?>,
+          )[widget.orderBy],
+        );
+      }
     }
 
     _liveStreamSub = latestDocQuery.onValue.listen(
@@ -329,9 +363,7 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
         : _data.isEmpty
             ? widget.onEmpty
             : BuildPagination(
-                items: widget.descending
-                    ? _data.reversed.toList()
-                    : _data,
+                items: widget.descending ? _data.reversed.toList() : _data,
                 itemBuilder: widget.itemBuilder,
                 separatorBuilder: widget.separatorBuilder ?? separatorBuilder,
                 isLoading: _isFetching,
