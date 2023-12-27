@@ -70,6 +70,8 @@ class RealtimeDBPagination extends StatefulWidget {
   /// ### Note:
   /// - The query must **NOT** contain a `limitToFirst` or `limitToLast` itself.
   /// - The `limit` must be set using the [limit] property of this widget.
+  /// - The query must **NOT** contain `orderBy` itself. The field to order the
+  /// data by must be set using the [orderBy] property of this widget.
   final Query query;
 
   /// The builder to use to build the items in the list.
@@ -91,7 +93,7 @@ class RealtimeDBPagination extends StatefulWidget {
   /// If null, the data will be sorted by the key.
   final String? orderBy;
 
-  /// Fetches and shows the last data first from the database.
+  /// Fetches data is decending order for the given [orderBy] field.
   ///
   /// Default value is `false`.
   final bool descending;
@@ -318,7 +320,10 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
         await tempSub?.cancel();
         if (snapshot.snapshot.children.isEmpty) return;
 
-        _data.insert(0, snapshot.snapshot.children.first);
+        _data.insert(
+          widget.descending ? _data.length : 0,
+          snapshot.snapshot.children.first,
+        );
 
         // To handle newly added data after this curently loaded data.
         await _setLiveListener();
