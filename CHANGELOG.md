@@ -1,6 +1,6 @@
 ## 3.0.1
 
-- fix: docs not loading after the first sroll
+- fix: docs not loading after the first scroll
 
 ## 3.0.0
 
