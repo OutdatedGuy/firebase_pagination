@@ -7,7 +7,8 @@ import 'firebase_options.dart';
 
 // Views
 import 'firestore_pagination_example.dart';
-import 'realtimedb_pagination_example.dart';
+import 'realtimedb_pagination_ascending_example.dart';
+import 'realtimedb_pagination_descending_example.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Firebase Pagination Example',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
         useMaterial3: true,
       ),
       home: const MyHomePage(),
@@ -65,11 +66,27 @@ class MyHomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RealtimeDBPaginationExample(),
+                    builder: (context) {
+                      return const RealtimeDBAscendingPaginationExample();
+                    },
                   ),
                 );
               },
-              child: const Text('RealtimeDB Pagination Example'),
+              child: const Text('Realtime DB Ascending Pagination Example'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const RealtimeDBDescendingPaginationExample();
+                    },
+                  ),
+                );
+              },
+              child: const Text('Realtime DB Descending Pagination Example'),
             ),
           ],
         ),

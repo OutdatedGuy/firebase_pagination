@@ -70,8 +70,6 @@ class RealtimeDBPagination extends StatefulWidget {
   /// ### Note:
   /// - The query must **NOT** contain a `limitToFirst` or `limitToLast` itself.
   /// - The `limit` must be set using the [limit] property of this widget.
-  /// - The query must **NOT** contain `orderBy` itself. The field to order the
-  /// data by must be set using the [orderBy] property of this widget.
   final Query query;
 
   /// The builder to use to build the items in the list.
