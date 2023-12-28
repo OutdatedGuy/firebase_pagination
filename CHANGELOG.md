@@ -1,3 +1,9 @@
+## 3.1.0
+
+- feat: update package and example template to latest
+- feat: Descending Pagination for realtime Database. Thanks [@CodeWithBishal](https://github.com/CodeWithBishal) for [#34](https://github.com/OutdatedGuy/firebase_pagination/pull/34)
+- docs: updated example and readme for new feature
+
 ## 3.0.1
 
 - fix: docs not loading after the first scroll
