@@ -2,21 +2,21 @@
 import 'package:flutter/material.dart';
 
 // Firebase Packages
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 // Third Party Packages
 import 'package:firebase_pagination/firebase_pagination.dart';
 
-class FirestorePaginationExample extends StatefulWidget {
-  const FirestorePaginationExample({super.key});
+class RealtimeDBDescendingPaginationExample extends StatefulWidget {
+  const RealtimeDBDescendingPaginationExample({super.key});
 
   @override
-  State<FirestorePaginationExample> createState() =>
-      _FirestorePaginationExampleState();
+  State<RealtimeDBDescendingPaginationExample> createState() =>
+      _RealtimeDBDescendingPaginationExampleState();
 }
 
-class _FirestorePaginationExampleState
-    extends State<FirestorePaginationExample> {
+class _RealtimeDBDescendingPaginationExampleState
+    extends State<RealtimeDBDescendingPaginationExample> {
   final _textController = TextEditingController();
   final _focusNode = FocusNode();
 
@@ -24,23 +24,28 @@ class _FirestorePaginationExampleState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Firestore Pagination Example'),
+        title: const Text('Realtime DB Descending Pagination Example'),
       ),
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
-              child: FirestorePagination(
-                query: FirebaseFirestore.instance
-                    .collection('messages')
-                    .orderBy('createdAt', descending: true),
+              child: RealtimeDBPagination(
+                query: FirebaseDatabase.instance
+                    .ref('Chat Messages')
+                    .orderByChild('createdAt'),
+                orderBy: 'createdAt',
+                descending: true,
                 isLive: true,
                 limit: 6,
                 reverse: true,
                 padding: const EdgeInsets.all(8.0),
                 separatorBuilder: (context, index) => const Divider(),
+                onEmpty: const Center(
+                  child: Text('No messages found!!!'),
+                ),
                 itemBuilder: (context, snapshot, index) {
-                  final msg = snapshot.get('text');
+                  final msg = snapshot.child('text').value as String?;
 
                   return ListTile(
                     shape: RoundedRectangleBorder(
@@ -75,7 +80,7 @@ class _FirestorePaginationExampleState
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -90,9 +95,9 @@ class _FirestorePaginationExampleState
     final text = _textController.text.trim();
     if (text.isEmpty) return;
 
-    FirebaseFirestore.instance.collection('messages').add({
+    FirebaseDatabase.instance.ref('Chat Messages').push().set({
       'text': text,
-      'createdAt': FieldValue.serverTimestamp(),
+      'createdAt': DateTime.now().millisecondsSinceEpoch,
     });
     _textController.clear();
     // Move focus back to the text field after sending the message

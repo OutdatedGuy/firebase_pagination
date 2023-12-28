@@ -2,21 +2,21 @@
 import 'package:flutter/material.dart';
 
 // Firebase Packages
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 // Third Party Packages
 import 'package:firebase_pagination/firebase_pagination.dart';
 
-class FirestorePaginationExample extends StatefulWidget {
-  const FirestorePaginationExample({super.key});
+class RealtimeDBAscendingPaginationExample extends StatefulWidget {
+  const RealtimeDBAscendingPaginationExample({super.key});
 
   @override
-  State<FirestorePaginationExample> createState() =>
-      _FirestorePaginationExampleState();
+  State<RealtimeDBAscendingPaginationExample> createState() =>
+      _RealtimeDBAscendingPaginationExampleState();
 }
 
-class _FirestorePaginationExampleState
-    extends State<FirestorePaginationExample> {
+class _RealtimeDBAscendingPaginationExampleState
+    extends State<RealtimeDBAscendingPaginationExample> {
   final _textController = TextEditingController();
   final _focusNode = FocusNode();
 
@@ -24,30 +24,46 @@ class _FirestorePaginationExampleState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Firestore Pagination Example'),
+        title: const Text('Realtime DB Ascending Pagination Example'),
       ),
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
-              child: FirestorePagination(
-                query: FirebaseFirestore.instance
-                    .collection('messages')
-                    .orderBy('createdAt', descending: true),
+              child: RealtimeDBPagination(
+                query: FirebaseDatabase.instance
+                    .ref('TODO List')
+                    .orderByChild('createdAt'),
+                orderBy: 'createdAt',
                 isLive: true,
                 limit: 6,
-                reverse: true,
                 padding: const EdgeInsets.all(8.0),
                 separatorBuilder: (context, index) => const Divider(),
+                onEmpty: const Center(
+                  child: Text('No TODO tasks found!!!'),
+                ),
                 itemBuilder: (context, snapshot, index) {
-                  final msg = snapshot.get('text');
+                  final msg = snapshot.child('text').value as String?;
 
                   return ListTile(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    tileColor: Colors.green,
-                    title: SelectableText('$msg'),
+                    tileColor: Colors.blueAccent[700],
+                    leading: Text(
+                      '$index.',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    title: SelectableText(
+                      '$msg',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   );
                 },
               ),
@@ -63,7 +79,7 @@ class _FirestorePaginationExampleState
                       focusNode: _focusNode,
                       autofocus: true,
                       decoration: const InputDecoration(
-                        hintText: 'Enter a message',
+                        hintText: 'Enter a TODO task',
                       ),
                       onSubmitted: (_) => _sendMessage(),
                     ),
@@ -75,7 +91,7 @@ class _FirestorePaginationExampleState
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -90,9 +106,9 @@ class _FirestorePaginationExampleState
     final text = _textController.text.trim();
     if (text.isEmpty) return;
 
-    FirebaseFirestore.instance.collection('messages').add({
+    FirebaseDatabase.instance.ref('TODO List').push().set({
       'text': text,
-      'createdAt': FieldValue.serverTimestamp(),
+      'createdAt': ServerValue.timestamp,
     });
     _textController.clear();
     // Move focus back to the text field after sending the message
