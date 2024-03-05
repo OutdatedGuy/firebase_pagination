@@ -1,25 +1,22 @@
 // Flutter Packages
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-
 // Dart Packages
 import 'dart:async';
 
 // Firebase Packages
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
+// Functions
+import 'functions/separator_builder.dart';
 // Data Models
 import 'models/view_type.dart';
 import 'models/wrap_options.dart';
-
 // Widgets
 import 'widgets/defaults/bottom_loader.dart';
 import 'widgets/defaults/empty_screen.dart';
 import 'widgets/defaults/initial_loader.dart';
 import 'widgets/views/build_pagination.dart';
-
-// Functions
-import 'functions/separator_builder.dart';
 
 /// A [StreamBuilder] that automatically loads more data when the user scrolls
 /// to the bottom.
@@ -44,6 +41,8 @@ class RealtimeDBPagination extends StatefulWidget {
     required this.query,
     required this.itemBuilder,
     required this.orderBy,
+    this.startAt,
+    this.endAt,
     super.key,
     this.descending = false,
     this.separatorBuilder,
@@ -90,6 +89,12 @@ class RealtimeDBPagination extends StatefulWidget {
   ///
   /// If null, the data will be sorted by the key.
   final String? orderBy;
+
+  /// Fetches data starting from the given [startAt] value.
+  final Object? startAt;
+
+  /// Fetches data ending at the given [endAt] value.
+  final Object? endAt;
 
   /// Fetches data is decending order for the given [orderBy] field.
   ///
@@ -228,6 +233,11 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
             _data.last.value! as Map<Object?, Object?>,
           )[widget.orderBy],
         );
+
+        // Adds the end point to the query if it is provided.
+        if (widget.startAt != null) {
+          docsQuery = docsQuery.startAt(widget.startAt);
+        }
       } else {
         // Sets starting point from where after data should be fetched.
         // If currently 15 items are loaded, and limit is 5 then total 20 items
@@ -238,6 +248,23 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
             _data.first.value! as Map<Object?, Object?>,
           )[widget.orderBy],
         );
+
+        // Adds the end point to the query if it is provided.
+        if (widget.endAt != null) {
+          docsQuery = docsQuery.endAt(widget.endAt);
+        }
+      }
+    } else {
+      if (widget.descending) {
+        // Adds the start point to the query if it is provided.
+        if (widget.startAt != null) {
+          docsQuery = docsQuery.endAt(widget.startAt);
+        }
+      } else {
+        // Adds the end point to the query if it is provided.
+        if (widget.endAt != null) {
+          docsQuery = docsQuery.startAt(widget.endAt);
+        }
       }
     }
 
