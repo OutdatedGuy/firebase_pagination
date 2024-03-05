@@ -235,8 +235,8 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
         );
 
         // Adds the end point to the query if it is provided.
-        if (widget.startAt != null) {
-          docsQuery = docsQuery.startAt(widget.startAt);
+        if (widget.endAt != null) {
+          docsQuery = docsQuery.startAt(widget.endAt);
         }
       } else {
         // Sets starting point from where after data should be fetched.
@@ -261,9 +261,9 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
           docsQuery = docsQuery.endAt(widget.startAt);
         }
       } else {
-        // Adds the end point to the query if it is provided.
-        if (widget.endAt != null) {
-          docsQuery = docsQuery.startAt(widget.endAt);
+        // Adds the start point to the query if it is provided.
+        if (widget.startAt != null) {
+          docsQuery = docsQuery.startAt(widget.startAt);
         }
       }
     }
