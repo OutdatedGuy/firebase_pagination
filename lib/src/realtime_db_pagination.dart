@@ -329,6 +329,11 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
             _data.last.value! as Map<Object?, Object?>,
           )[widget.orderBy],
         );
+
+        // Adds the start point to the query if it is provided.
+        if (widget.startAt != null) {
+          latestDocQuery = latestDocQuery.endAt(widget.startAt);
+        }
       } else {
         // Sets query to fetch data before the first element in the array,
         // whch is the smallest value
@@ -337,6 +342,11 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
             _data.first.value! as Map<Object?, Object?>,
           )[widget.orderBy],
         );
+
+        // Adds the start point to the query if it is provided.
+        if (widget.startAt != null) {
+          latestDocQuery = latestDocQuery.startAt(widget.startAt);
+        }
       }
     }
 
