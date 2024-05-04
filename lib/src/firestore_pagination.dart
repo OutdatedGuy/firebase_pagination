@@ -74,7 +74,7 @@ class FirestorePagination extends StatefulWidget {
   ///
   /// The builder is passed the build context, snapshot of the document and
   /// index of the item in the list.
-  final Widget Function(BuildContext, DocumentSnapshot, int) itemBuilder;
+  final Widget Function(BuildContext, List<DocumentSnapshot>, int) itemBuilder;
 
   /// The builder to use to render the separator.
   ///
