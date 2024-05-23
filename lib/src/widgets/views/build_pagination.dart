@@ -87,7 +87,7 @@ class BuildPagination<T> extends StatelessWidget {
           physics: physics,
           shrinkWrap: shrinkWrap,
           padding: padding,
-          itemCount: 1 + (isLoading ? 1 : 0),
+          itemCount: items.length + (isLoading ? 1 : 0),
           itemBuilder: (BuildContext context, int index) {
             if (index >= items.length) return bottomLoader;
 
