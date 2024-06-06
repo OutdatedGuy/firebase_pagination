@@ -40,7 +40,7 @@ class _FirestorePaginationExampleState
                 padding: const EdgeInsets.all(8.0),
                 separatorBuilder: (context, index) => const Divider(),
                 itemBuilder: (context, snapshot, index) {
-                  final msg = snapshot.get('text');
+                  final msg = snapshot[index].get('text');
 
                   return ListTile(
                     shape: RoundedRectangleBorder(

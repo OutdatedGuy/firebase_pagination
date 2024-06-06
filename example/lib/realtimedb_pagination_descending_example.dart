@@ -45,7 +45,7 @@ class _RealtimeDBDescendingPaginationExampleState
                   child: Text('No messages found!!!'),
                 ),
                 itemBuilder: (context, snapshot, index) {
-                  final msg = snapshot.child('text').value as String?;
+                  final msg = snapshot[index].child('text').value as String?;
 
                   return ListTile(
                     shape: RoundedRectangleBorder(

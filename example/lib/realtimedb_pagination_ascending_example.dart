@@ -43,7 +43,7 @@ class _RealtimeDBAscendingPaginationExampleState
                   child: Text('No TODO tasks found!!!'),
                 ),
                 itemBuilder: (context, snapshot, index) {
-                  final msg = snapshot.child('text').value as String?;
+                  final msg = snapshot[index].child('text').value as String?;
 
                   return ListTile(
                     shape: RoundedRectangleBorder(
