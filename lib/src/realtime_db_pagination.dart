@@ -76,7 +76,7 @@ class RealtimeDBPagination extends StatefulWidget {
   ///
   /// The builder is passed the build context, snapshot of data and index of
   /// the item in the list.
-  final Widget Function(BuildContext, DataSnapshot, int) itemBuilder;
+  final Widget Function(BuildContext, List<DataSnapshot>, int) itemBuilder;
 
   /// The field to use to sort the data. Give the same value as the field
   /// used to order the data in the query.
