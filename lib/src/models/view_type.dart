@@ -13,4 +13,7 @@ enum ViewType {
 
   /// Loads the data as a scrollable [Wrap].
   wrap,
+
+  /// Loads the data as a [PageView].
+  page,
 }
