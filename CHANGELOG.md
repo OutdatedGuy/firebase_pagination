@@ -1,8 +1,12 @@
+## 4.0.1
+
+- refactor: lowered sdk constraints to support dart 2.17 and above
+
 ## 4.0.0
 
 ### BREAKING CHANGES
 
-- `itemBuilder` will now send the entire document snapshot array instead of a single document snapshot
+- `itemBuilder` will now send the entire document snapshot array instead of a single document snapshot. Thanks [@opxdelwin](https://github.com/opxdelwin) for [#48](https://github.com/OutdatedGuy/firebase_pagination/pull/48)
 
 ### Features
 
