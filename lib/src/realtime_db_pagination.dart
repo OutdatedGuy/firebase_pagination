@@ -1,6 +1,9 @@
-// Flutter Packages
 // Dart Packages
 import 'dart:async';
+
+// Flutter Packages
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 // Firebase Packages
 import 'package:firebase_database/firebase_database.dart';
@@ -10,6 +13,7 @@ import 'package:flutter/scheduler.dart';
 // Functions
 import 'functions/separator_builder.dart';
 // Data Models
+import 'models/page_options.dart';
 import 'models/view_type.dart';
 import 'models/wrap_options.dart';
 // Widgets
@@ -53,6 +57,7 @@ class RealtimeDBPagination extends StatefulWidget {
       crossAxisCount: 2,
     ),
     this.wrapOptions = const WrapOptions(),
+    this.pageOptions = const PageOptions(),
     this.onEmpty = const EmptyScreen(),
     this.bottomLoader = const BottomLoader(),
     this.initialLoader = const InitialLoader(),
@@ -62,6 +67,7 @@ class RealtimeDBPagination extends StatefulWidget {
     this.physics,
     this.padding,
     this.controller,
+    this.pageController,
   });
 
   /// The query to use to fetch data from Firebase Realtime Database.
@@ -75,7 +81,7 @@ class RealtimeDBPagination extends StatefulWidget {
   ///
   /// The builder is passed the build context, snapshot of data and index of
   /// the item in the list.
-  final Widget Function(BuildContext, DataSnapshot, int) itemBuilder;
+  final Widget Function(BuildContext, List<DataSnapshot>, int) itemBuilder;
 
   /// The field to use to sort the data. Give the same value as the field
   /// used to order the data in the query.
@@ -134,6 +140,11 @@ class RealtimeDBPagination extends StatefulWidget {
   /// Defaults to [WrapOptions].
   final WrapOptions wrapOptions;
 
+  /// The [PageView] properties to use.
+  ///
+  /// Defaults to [PageOptions].
+  final PageOptions pageOptions;
+
   /// The widget to use when data is empty.
   ///
   /// Defaults to [EmptyScreen].
@@ -169,6 +180,11 @@ class RealtimeDBPagination extends StatefulWidget {
   /// Defaults to [ScrollController].
   final ScrollController? controller;
 
+  /// The page controller to use for the [PageView].
+  ///
+  /// Defaults to [PageController].
+  final PageController? pageController;
+
   @override
   State<RealtimeDBPagination> createState() => _RealtimeDBPaginationState();
 }
@@ -189,6 +205,10 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
   /// [ScrollController] to listen to scroll end and load more data.
   late final ScrollController _controller =
       widget.controller ?? ScrollController();
+
+  /// [PageController] to listen to page changes and load more data.
+  late final PageController _pageController =
+      widget.pageController ?? PageController();
 
   /// Whether initial data is loading.
   bool _isInitialLoading = true;
@@ -302,7 +322,8 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
       // scroll to the bottom and load more data.
       if (_isInitialLoading || _isFetching || _isEnded) return;
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        if (_controller.position.maxScrollExtent <= 0) {
+        if (_controller.hasClients &&
+            _controller.position.maxScrollExtent <= 0) {
           _loadData();
         }
       });
@@ -372,6 +393,7 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
   /// To handle scroll end event and load more data.
   void _scrollListener() {
     if (_isInitialLoading || _isFetching || _isEnded) return;
+    if (!_controller.hasClients) return;
 
     final position = _controller.position;
     if (position.pixels >= (position.maxScrollExtent - 50)) {
@@ -393,6 +415,7 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
     _controller
       ..removeListener(_scrollListener)
       ..dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -411,12 +434,17 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
                 bottomLoader: widget.bottomLoader,
                 gridDelegate: widget.gridDelegate,
                 wrapOptions: widget.wrapOptions,
+                pageOptions: widget.pageOptions,
                 scrollDirection: widget.scrollDirection,
                 reverse: widget.reverse,
                 controller: _controller,
+                pageController: _pageController,
                 shrinkWrap: widget.shrinkWrap,
                 physics: widget.physics,
                 padding: widget.padding,
+                onPageChanged: (index) {
+                  if (index >= _data.length - 1) _loadData();
+                },
               );
   }
 }

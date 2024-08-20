@@ -28,7 +28,7 @@ A simple and effective way to **Paginate** Firebase related data.
 #### Add to Dependencies
 
 ```yaml
-firebase_pagination: ^3.1.0
+firebase_pagination: ^4.0.1
 ```
 
 #### Import the package
@@ -44,8 +44,8 @@ import 'package:firebase_pagination/firebase_pagination.dart';
 ```dart
 FirestorePagination(
   query: FirebaseFirestore.instance.collection('scores').orderBy('score'),
-  itemBuilder: (context, documentSnapshot, index) {
-    final data = documentSnapshot.data() as Map<String, dynamic>;
+  itemBuilder: (context, docs, index) {
+    final data = docs[index].data() as Map<String, dynamic>;
 
     // Do something cool with the data
   },
@@ -58,8 +58,8 @@ FirestorePagination(
 RealtimeDBPagination(
   query: FirebaseDatabase.instance.ref().child('scores').orderByChild('score'),
   orderBy: 'score',
-  itemBuilder: (context, dataSnapshot, index) {
-    final data = dataSnapshot.value as Map<String, dynamic>;
+  itemBuilder: (context, dataNodes, index) {
+    final data = dataNodes[index].value as Map<String, dynamic>;
 
     // Do something cool with the data
   },
@@ -96,6 +96,7 @@ RealtimeDBPagination(
 |      `isLive`      |                 **Whether to fetch newly added items as they are added to Database.**                  |        _bool_        |             `false`             |
 |   `gridDelegate`   |                               **The delegate to use for the GridView.**                                | _SliverGridDelegate_ |       `crossAxisCount: 2`       |
 |   `wrapOptions`    |                                 **The Wrap widget properties to use.**                                 |    _WrapOptions_     |         `WrapOptions()`         |
+|   `pageOptions`    |                               **The PageView widget properties to use.**                               |    _PageOptions_     |         `PageOptions()`         |
 |     `onEmpty`      |                               **The widget to use when data is empty.**                                |       _Widget_       |         `EmptyScreen()`         |
 |   `bottomLoader`   |                            **The widget to use when more data is loading.**                            |       _Widget_       |        `BottomLoader()`         |
 |  `initialLoader`   |                         **The widget to use when data is loading initially.**                          |       _Widget_       |        `InitialLoader()`        |
@@ -104,7 +105,8 @@ RealtimeDBPagination(
 |    `shrinkWrap`    |                              **Should the ScrollView be shrink-wrapped.**                              |        _bool_        |             `false`             |
 |     `physics`      |                           **The scroll behavior to use for the ScrollView.**                           |   _ScrollPhysics_    |                -                |
 |     `padding`      |                               **The padding to use for the ScrollView.**                               | _EdgeInsetsGeometry_ |                -                |
-|    `controller`    |                             **The controller to use for the ScrollView.**                              |  _ScrollController_  |                -                |
+|    `controller`    |                             **The controller to use for the ScrollView.**                              |  _ScrollController_  |       ScrollController()        |
+|  `pageController`  |                              **The controller to use for the PageView.**                               |   _PageController_   |        PageController()         |
 |    `descending`    | **Whether the data should be fetched in descending order or not. Only works for RealtimeDBPagination** |        _bool_        |             `false`             |
 
 ### If you liked the package, then please give it a [Like 👍🏼][package] and [Star ⭐][repository]
