@@ -6,7 +6,6 @@ repository: https://github.com/OutdatedGuy/firebase_pagination
 
 environment:
   sdk: '>=2.17.0 <4.0.0'
-  flutter: ">=1.17.0"
 
 dependencies:
   cloud_firestore: ^5.0.0

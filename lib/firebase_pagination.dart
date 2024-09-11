@@ -12,3 +12,4 @@ export 'src/firestore_pagination.dart';
 // Data Models
 export 'src/models/view_type.dart';
 export 'src/models/wrap_options.dart';
+export 'src/models/filter_model.dart';
