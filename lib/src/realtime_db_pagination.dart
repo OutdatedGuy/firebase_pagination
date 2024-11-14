@@ -9,6 +9,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 // Data Models
+import 'models/filter_model.dart';
 import 'models/page_options.dart';
 import 'models/view_type.dart';
 import 'models/wrap_options.dart';
@@ -43,6 +44,7 @@ class RealtimeDBPagination extends StatefulWidget {
   /// Data can be represented in a [ListView], [GridView] or scollable [Wrap].
   const RealtimeDBPagination({
     required this.query,
+    this.searchFilter,
     required this.itemBuilder,
     required this.orderBy,
     super.key,
@@ -74,6 +76,9 @@ class RealtimeDBPagination extends StatefulWidget {
   /// - The query must **NOT** contain a `limitToFirst` or `limitToLast` itself.
   /// - The `limit` must be set using the [limit] property of this widget.
   final Query query;
+
+  /// Filter by substring matching
+  final FilterModel? searchFilter;
 
   /// The builder to use to build the items in the list.
   ///
@@ -381,12 +386,21 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
 
   @override
   Widget build(BuildContext context) {
+    final filteredData = widget.searchFilter == null
+        ? _data
+        : _data
+            .where((item) => (item.value
+                    as Map<String, dynamic>)[widget.searchFilter!.fieldName]
+                .toString()
+                .toLowerCase()
+                .contains(widget.searchFilter!.searchValue.toLowerCase()))
+            .toList();
     return _isInitialLoading
         ? widget.initialLoader
-        : _data.isEmpty
+        : filteredData.isEmpty
             ? widget.onEmpty
             : BuildPagination(
-                items: widget.descending ? _data.reversed.toList() : _data,
+                items: widget.descending ? filteredData.reversed.toList() : filteredData,
                 itemBuilder: widget.itemBuilder,
                 separatorBuilder: widget.separatorBuilder ?? separatorBuilder,
                 isLoading: _isFetching,

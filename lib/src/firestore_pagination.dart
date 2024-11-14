@@ -9,6 +9,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Data Models
+import 'models/filter_model.dart';
 import 'models/page_options.dart';
 import 'models/view_type.dart';
 import 'models/wrap_options.dart';
@@ -43,6 +44,7 @@ class FirestorePagination extends StatefulWidget {
   /// Data can be represented in a [ListView], [GridView] or scollable [Wrap].
   const FirestorePagination({
     required this.query,
+    this.searchFilter,
     required this.itemBuilder,
     super.key,
     this.separatorBuilder,
@@ -72,6 +74,9 @@ class FirestorePagination extends StatefulWidget {
   /// - The query must **NOT** contain a `limit` itself.
   /// - The `limit` must be set using the [limit] property of this widget.
   final Query query;
+
+  /// Filter by substring matching
+  final FilterModel? searchFilter;
 
   /// The builder to use to build the items in the list.
   ///
@@ -314,12 +319,21 @@ class _FirestorePaginationState extends State<FirestorePagination> {
 
   @override
   Widget build(BuildContext context) {
+    final filteredDocs = widget.searchFilter == null
+        ? _docs
+        : _docs
+            .where((item) => (item.data()
+                    as Map<String, dynamic>)[widget.searchFilter!.fieldName]
+                .toString()
+                .toLowerCase()
+                .contains(widget.searchFilter!.searchValue.toLowerCase()))
+            .toList();
     return _isInitialLoading
         ? widget.initialLoader
-        : _docs.isEmpty
+        : filteredDocs.isEmpty
             ? widget.onEmpty
             : BuildPagination(
-                items: _docs,
+                items: filteredDocs,
                 itemBuilder: widget.itemBuilder,
                 separatorBuilder: widget.separatorBuilder ?? separatorBuilder,
                 isLoading: _isFetching,
