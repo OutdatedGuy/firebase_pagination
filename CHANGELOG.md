@@ -1,3 +1,8 @@
+## 4.1.0
+
+- feat: add substring filter for specific fields in pagination. Thanks [@delwar36](https://github.com/delwar36) for [#62](https://github.com/OutdatedGuy/firebase_pagination/pull/62)
+- chore: updated example to Flutter 3.27
+
 ## 4.0.1
 
 - refactor: lowered sdk constraints to support dart 2.17 and above

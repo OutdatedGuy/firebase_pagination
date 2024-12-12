@@ -28,7 +28,7 @@ A simple and effective way to **Paginate** Firebase related data.
 #### Add to Dependencies
 
 ```yaml
-firebase_pagination: ^4.0.1
+firebase_pagination: ^4.1.0
 ```
 
 #### Import the package
