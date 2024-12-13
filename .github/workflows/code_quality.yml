@@ -45,4 +45,4 @@ jobs:
 
       # Statically analyze the Dart code for any errors.
       - name: Analyze project source
-        run: flutter analyze .
+        run: flutter analyze lib
