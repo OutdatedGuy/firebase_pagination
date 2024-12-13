@@ -400,7 +400,9 @@ class _RealtimeDBPaginationState extends State<RealtimeDBPagination> {
         : filteredData.isEmpty
             ? widget.onEmpty
             : BuildPagination(
-                items: widget.descending ? filteredData.reversed.toList() : filteredData,
+                items: widget.descending
+                    ? filteredData.reversed.toList()
+                    : filteredData,
                 itemBuilder: widget.itemBuilder,
                 separatorBuilder: widget.separatorBuilder ?? separatorBuilder,
                 isLoading: _isFetching,

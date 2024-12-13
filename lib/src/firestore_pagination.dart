@@ -275,7 +275,9 @@ class _FirestorePaginationState extends State<FirestorePagination> {
       (QuerySnapshot snapshot) async {
         await tempSub?.cancel();
         if (snapshot.docs.isEmpty ||
-            snapshot.docs.first.metadata.hasPendingWrites) return;
+            snapshot.docs.first.metadata.hasPendingWrites) {
+          return;
+        }
 
         _docs.insert(0, snapshot.docs.first);
 
