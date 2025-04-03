@@ -44,7 +44,7 @@ class FirestorePagination extends StatefulWidget {
   /// Data can be represented in a [ListView], [GridView] or scollable [Wrap].
   const FirestorePagination({
     required this.query,
-    this.searchFilter,
+    this.searchFilters = const [],
     required this.itemBuilder,
     super.key,
     this.separatorBuilder,
@@ -76,7 +76,7 @@ class FirestorePagination extends StatefulWidget {
   final Query query;
 
   /// Filter by substring matching
-  final FilterModel? searchFilter;
+  final List<FilterModel> searchFilters;
 
   /// The builder to use to build the items in the list.
   ///
@@ -321,15 +321,23 @@ class _FirestorePaginationState extends State<FirestorePagination> {
 
   @override
   Widget build(BuildContext context) {
-    final filteredDocs = widget.searchFilter == null
+    final filteredDocs = widget.searchFilters.isNotEmpty
         ? _docs
-        : _docs
-            .where((item) => (item.data()
-                    as Map<String, dynamic>)[widget.searchFilter!.fieldName]
-                .toString()
-                .toLowerCase()
-                .contains(widget.searchFilter!.searchValue.toLowerCase()))
-            .toList();
+            .where((item) => (widget.searchFilters
+                .map((filter) {
+                  final value =
+                      (item.data() as Map<String, dynamic>)[filter.fieldName]
+                          ?.toString()
+                          .toLowerCase();
+                  return value != null && filter.match(
+                    value,
+                    filter.searchValue.toLowerCase(),
+                  );
+                })
+                .toList()
+                .any((it) => it)))
+            .toList()
+        : _docs;
     return _isInitialLoading
         ? widget.initialLoader
         : filteredDocs.isEmpty
