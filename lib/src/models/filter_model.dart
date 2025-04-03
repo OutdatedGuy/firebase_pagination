@@ -4,8 +4,10 @@ class FilterModel {
   FilterModel({
     required this.fieldName,
     required this.searchValue,
-    this.fuzzySearch = false,
-  });
+    final bool Function(String, String)? match,
+  }):
+      match = match ?? ((value, search) =>
+          value.toLowerCase().contains(search.toLowerCase()));
 
   /// The name of the field in collection to be searched.
   final String fieldName;
@@ -13,7 +15,8 @@ class FilterModel {
   /// The substring that is intented to search in [fieldName] value.
   final String searchValue;
 
-  /// If true, the search will be fuzzy, based on the similarity of the strings.
-  /// Uses the package [string_similarity](https://pub.dev/packages/string_similarity).
-  final bool fuzzySearch;
+  /// A function to compare [searchValue] with the value of [fieldName].
+  ///
+  /// Defaults to a case-insensitive substring search.
+  bool Function(String, String) match;
 }

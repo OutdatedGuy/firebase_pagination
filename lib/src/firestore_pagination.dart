@@ -7,7 +7,6 @@ import 'package:flutter/scheduler.dart';
 
 // Firebase Packages
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:string_similarity/string_similarity.dart';
 
 // Data Models
 import 'models/filter_model.dart';
@@ -330,14 +329,10 @@ class _FirestorePaginationState extends State<FirestorePagination> {
                       (item.data() as Map<String, dynamic>)[filter.fieldName]
                           ?.toString()
                           .toLowerCase();
-                  if (filter.fuzzySearch) {
-                    return (value?.similarityTo(
-                                filter.searchValue.toLowerCase()) ??
-                            0) >
-                        0.5;
-                  }
-                  return value?.contains(filter.searchValue.toLowerCase()) ??
-                      false;
+                  return value != null && filter.match(
+                    value,
+                    filter.searchValue.toLowerCase(),
+                  );
                 })
                 .toList()
                 .any((it) => it)))
