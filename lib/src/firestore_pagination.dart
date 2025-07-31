@@ -66,6 +66,7 @@ class FirestorePagination extends StatefulWidget {
     this.padding,
     this.controller,
     this.pageController,
+    this.onData,
   });
 
   /// The query to use to fetch data from Firestore.
@@ -161,6 +162,11 @@ class FirestorePagination extends StatefulWidget {
   /// Defaults to [PageController].
   final PageController? pageController;
 
+  /// Callback for when data is loaded, allows access to loaded data from the parent widget.
+  ///
+  /// Defaults to `null`.
+  final void Function(List<DocumentSnapshot>)? onData;
+
   @override
   State<FirestorePagination> createState() => _FirestorePaginationState();
 }
@@ -221,6 +227,8 @@ class _FirestorePaginationState extends State<FirestorePagination> {
         ..clear()
         ..addAll(snapshot.docs);
 
+      widget.onData?.call(_docs);
+
       // To set new updates listener for the existing data
       // or to set new live listener if the first document is removed.
       final isDocRemoved = snapshot.docChanges.any(
@@ -280,6 +288,8 @@ class _FirestorePaginationState extends State<FirestorePagination> {
         }
 
         _docs.insert(0, snapshot.docs.first);
+
+        widget.onData?.call(_docs);
 
         // To handle newly added data after this curently loaded data.
         await _setLiveListener();
