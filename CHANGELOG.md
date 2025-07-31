@@ -1,3 +1,8 @@
+## 4.2.0
+
+- feat: updated Firebase dependencies to latest versions (`cloud_firestore: ^6.0.0` and `firebase_database: ^12.0.0`)
+- chore: updated example template to Flutter 3.32
+
 ## 4.1.0
 
 - feat: add substring filter for specific fields in pagination. Thanks [@delwar36](https://github.com/delwar36) for [#62](https://github.com/OutdatedGuy/firebase_pagination/pull/62)
