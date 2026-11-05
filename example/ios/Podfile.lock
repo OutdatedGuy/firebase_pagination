@@ -1,99 +1,16 @@
 PODS:
-  - FirebaseCore (12.0.0):
-    - FirebaseCoreInternal (~> 12.0.0)
-    - GoogleUtilities/Environment (~> 8.1)
-    - GoogleUtilities/Logger (~> 8.1)
-  - FirebaseCoreExtension (12.0.0):
-    - FirebaseCore (~> 12.0.0)
-  - FirebaseCoreInternal (12.0.0):
-    - "GoogleUtilities/NSData+zlib (~> 8.1)"
-  - FirebaseFirestore (12.0.0):
-    - FirebaseFirestoreBinary (= 12.0.0)
-  - FirebaseFirestoreAbseilBinary (1.2024072200.0)
-  - FirebaseFirestoreBinary (12.0.0):
-    - FirebaseCore (= 12.0.0)
-    - FirebaseCoreExtension (= 12.0.0)
-    - FirebaseFirestoreInternalBinary (= 12.0.0)
-    - FirebaseSharedSwift (= 12.0.0)
-  - FirebaseFirestoreGRPCBoringSSLBinary (1.69.0)
-  - FirebaseFirestoreGRPCCoreBinary (1.69.0):
-    - FirebaseFirestoreAbseilBinary (= 1.2024072200.0)
-    - FirebaseFirestoreGRPCBoringSSLBinary (= 1.69.0)
-  - FirebaseFirestoreGRPCCPPBinary (1.69.0):
-    - FirebaseFirestoreAbseilBinary (= 1.2024072200.0)
-    - FirebaseFirestoreGRPCCoreBinary (= 1.69.0)
-  - FirebaseFirestoreInternalBinary (12.0.0):
-    - FirebaseCore (= 12.0.0)
-    - FirebaseFirestoreAbseilBinary (= 1.2024072200.0)
-    - FirebaseFirestoreGRPCCPPBinary (= 1.69.0)
-    - leveldb-library (~> 1.22)
-    - nanopb (~> 3.30910.0)
-  - FirebaseSharedSwift (12.0.0)
   - Flutter (1.0.0)
-  - GoogleUtilities/Environment (8.1.0):
-    - GoogleUtilities/Privacy
-  - GoogleUtilities/Logger (8.1.0):
-    - GoogleUtilities/Environment
-    - GoogleUtilities/Privacy
-  - "GoogleUtilities/NSData+zlib (8.1.0)":
-    - GoogleUtilities/Privacy
-  - GoogleUtilities/Privacy (8.1.0)
-  - leveldb-library (1.22.6)
-  - nanopb (3.30910.0):
-    - nanopb/decode (= 3.30910.0)
-    - nanopb/encode (= 3.30910.0)
-  - nanopb/decode (3.30910.0)
-  - nanopb/encode (3.30910.0)
 
 DEPENDENCIES:
-  - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `12.0.0`)
   - Flutter (from `Flutter`)
 
-SPEC REPOS:
-  trunk:
-    - FirebaseCore
-    - FirebaseCoreExtension
-    - FirebaseCoreInternal
-    - FirebaseFirestoreAbseilBinary
-    - FirebaseFirestoreBinary
-    - FirebaseFirestoreGRPCBoringSSLBinary
-    - FirebaseFirestoreGRPCCoreBinary
-    - FirebaseFirestoreGRPCCPPBinary
-    - FirebaseFirestoreInternalBinary
-    - FirebaseSharedSwift
-    - GoogleUtilities
-    - leveldb-library
-    - nanopb
-
 EXTERNAL SOURCES:
-  FirebaseFirestore:
-    :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
-    :tag: 12.0.0
   Flutter:
     :path: Flutter
 
-CHECKOUT OPTIONS:
-  FirebaseFirestore:
-    :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
-    :tag: 12.0.0
-
 SPEC CHECKSUMS:
-  FirebaseCore: 055f4ab117d5964158c833f3d5e7ec6d91648d4a
-  FirebaseCoreExtension: 639afb3de6abd611952be78a794c54a47fa0f361
-  FirebaseCoreInternal: dedc28e569a4be85f38f3d6af1070a2e12018d55
-  FirebaseFirestore: e91d2b8a03399f154fdd3782d2435d2769e8baf8
-  FirebaseFirestoreAbseilBinary: 4cfa8823cedc1b774843e04fe578ad279b387f97
-  FirebaseFirestoreBinary: 95ad0b144bb28e14ceca0f29aeb03f7444eb1ff1
-  FirebaseFirestoreGRPCBoringSSLBinary: c3dfef3ff448ae2c1c85f9baf9fac5afc4db99fa
-  FirebaseFirestoreGRPCCoreBinary: 565534e160a0415d12185f7f171c52a567382fbd
-  FirebaseFirestoreGRPCCPPBinary: 6c0134e8d230ee58b9d51dec2a30a48efd6d5dc7
-  FirebaseFirestoreInternalBinary: 3a19506d88eecbafae8e639a0ec5769e2eddba27
-  FirebaseSharedSwift: 59266c22ccfcef604d725c034c568fa666ea9bda
   Flutter: 71a624a5bc0c04062bf19101d501e466baf2fb47
-  GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
-  leveldb-library: cc8b8f8e013647a295ad3f8cd2ddf49a6f19be19
-  nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
 
-PODFILE CHECKSUM: 5b7234d87a7807c29ca45300b7feb8af03836736
+PODFILE CHECKSUM: 57c8aed26fba39d3ec9424816221f294a07c58eb
 
 COCOAPODS: 1.17.0
