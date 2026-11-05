@@ -1,3 +1,8 @@
+## 4.3.0
+
+- feat: updated Firebase dependencies to latest versions (`cloud_firestore: ^7.1.0` and `firebase_database: ^13.0.1`)
+- feat: updated package to Flutter 3.47 template
+
 ## 4.2.0
 
 - feat: updated Firebase dependencies to latest versions (`cloud_firestore: ^6.0.0` and `firebase_database: ^12.0.0`)
